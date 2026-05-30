@@ -1,0 +1,171 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+    background:#eef2f7;
+
+    min-height:100vh;
+
+    padding:40px;
+}
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.1);
+}
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.hero h1{
+
+    color:#1565c0;
+
+    font-size:42px;
+
+    margin-bottom:10px;
+}
+
+.hero p{
+
+    color:#666;
+
+    font-size:18px;
+}
+
+input[type="text"]{
+
+    width:100%;
+
+    padding:18px;
+
+    border:2px solid #ddd;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+
+    font-size:18px;
+}
+
+input[type="file"]{
+
+    margin-bottom:15px;
+}
+
+.buttons{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-bottom:15px;
+}
+
+button{
+
+    border:none;
+
+    background:#1976d2;
+
+    color:white;
+
+    padding:14px 20px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+
+    background:#0d47a1;
+}
+
+.card{
+
+    margin-top:25px;
+
+    background:#fafafa;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.08);
+}
+
+.card h2{
+
+    margin-bottom:15px;
+
+    color:#1565c0;
+}
+
+#result{
+
+    min-height:120px;
+
+    font-size:18px;
+}
+
+#history{
+
+    list-style:none;
+}
+
+#history li{
+
+    background:white;
+
+    padding:12px;
+
+    margin-bottom:10px;
+
+    border-radius:10px;
+
+    border-left:5px solid #1565c0;
+}
+
+@media(max-width:768px){
+
+    .buttons{
+
+        flex-direction:column;
+    }
+
+    button{
+
+        width:100%;
+    }
+
+    .hero h1{
+
+        font-size:30px;
+    }
+}

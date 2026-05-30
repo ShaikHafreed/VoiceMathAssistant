@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Voice Math Assistant</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>🎤 Voice Math Assistant</h1>
+
+        <p>
+            AI Powered Voice Recognition,
+            OCR Scanner,
+            Dashboard,
+            Quiz and Math Solver
+        </p>
+
+    </div>
+
+    <input
+            type="text"
+            id="expression"
+            placeholder="Speak or type your math problem">
+
+    <div class="buttons">
+
+        <button id="voiceBtn">
+            🎙 Start Voice
+        </button>
+
+        <button id="calculateBtn">
+            🧮 Calculate
+        </button>
+
+        <button id="clearBtn">
+            🧹 Clear
+        </button>
+
+    </div>
+
+    <div class="buttons">
+
+        <button onclick="teachTopic()">
+            📚 Teach Me
+        </button>
+
+        <button onclick="showProgress()">
+            📈 Learning Progress
+        </button>
+
+        <button onclick="showMemory()">
+            🧠 Memory
+        </button>
+
+    </div>
+
+    <div class="buttons">
+
+        <button onclick="startQuiz()">
+            📝 Quiz
+        </button>
+
+        <button onclick="openHistory()">
+            📜 History
+        </button>
+
+        <button onclick="openDashboard()">
+            📊 Dashboard
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📷 OCR Math Solver</h2>
+
+        <input
+                type="file"
+                id="ocrFile">
+
+        <button onclick="scanOCRImage()">
+            Scan Math Image
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📊 Result</h2>
+
+        <div id="result">
+
+            Waiting...
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📜 History</h2>
+
+        <ul id="history">
+
+        </ul>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
