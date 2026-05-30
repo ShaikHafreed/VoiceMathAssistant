@@ -1,0 +1,25 @@
+# Maven
+target/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Logs
+*.log
+
+# Java
+*.class
+*.jar
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Environment files
+application-local.properties
