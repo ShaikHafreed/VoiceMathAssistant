@@ -45,8 +45,6 @@ public class ExplanationController {
                         result);
 
         return new ExplanationResponse(
-                expression,
-                result,
                 explanation);
     }
 }

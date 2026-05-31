@@ -1,0 +1,43 @@
+body{
+
+    background:#eef3f9;
+
+    font-family:Segoe UI;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:100vh;
+}
+
+.container{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.1);
+
+    text-align:center;
+}
+
+button{
+
+    background:#1976d2;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 25px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}

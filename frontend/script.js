@@ -41,11 +41,8 @@ if (SpeechRecognition) {
     recognition.onresult =
         (event) => {
 
-            const speech =
-                event.results[0][0].transcript;
-
             expressionInput.value =
-                speech;
+                event.results[0][0].transcript;
         };
 
 } else {
@@ -81,13 +78,15 @@ async function calculateExpression() {
             await fetch(
                 "http://localhost:8080/api/calculate",
                 {
-                    method: "POST",
-                    headers: {
+                    method:"POST",
+
+                    headers:{
                         "Content-Type":
-                            "application/json"
+                        "application/json"
                     },
-                    body: JSON.stringify({
-                        speech: speech
+
+                    body:JSON.stringify({
+                        speech:speech
                     })
                 }
             );
@@ -95,11 +94,34 @@ async function calculateExpression() {
         const data =
             await response.json();
 
+        const explanationResponse =
+            await fetch(
+                `http://localhost:8080/api/explanation?expression=${encodeURIComponent(data.expression)}&result=${data.result}`
+            );
+
+        const explanationData =
+            await explanationResponse.json();
+
         resultDiv.innerHTML =
-            `
-            <h3>Answer</h3>
-            <p>${data.result}</p>
-            `;
+        `
+        <div class="answer-card">
+
+            <h2>✅ Answer</h2>
+
+            <p class="answer">
+                ${data.result}
+            </p>
+
+            <hr>
+
+            <h2>🤖 AI Tutor</h2>
+
+            <pre class="explanation">
+${explanationData.explanation}
+            </pre>
+
+        </div>
+        `;
 
         addHistory(
             data.expression,
@@ -110,7 +132,7 @@ async function calculateExpression() {
             data.result
         );
 
-    } catch (error) {
+    } catch(error){
 
         console.error(error);
 
@@ -120,7 +142,7 @@ async function calculateExpression() {
 }
 
 // ==========================
-// OCR Math Scanner
+// OCR Scanner
 // ==========================
 
 async function scanOCRImage() {
@@ -136,7 +158,7 @@ async function scanOCRImage() {
     ) {
 
         alert(
-            "Please select an image first"
+            "Please select an image"
         );
 
         return;
@@ -150,17 +172,14 @@ async function scanOCRImage() {
         fileInput.files[0]
     );
 
-    resultDiv.innerHTML =
-        "Scanning image...";
-
     try {
 
         const response =
             await fetch(
                 "http://localhost:8080/api/ocr-math",
                 {
-                    method: "POST",
-                    body: formData
+                    method:"POST",
+                    body:formData
                 }
             );
 
@@ -168,28 +187,41 @@ async function scanOCRImage() {
             await response.json();
 
         resultDiv.innerHTML =
-            `
-            <h3>OCR Text</h3>
-            <p>${data.ocrText}</p>
+        `
+        <h2>OCR Result</h2>
 
-            <h3>Expression</h3>
-            <p>${data.expression}</p>
+        <p>
+        ${data.ocrText}
+        </p>
 
-            <h3>Result</h3>
-            <p>${data.result}</p>
-            `;
+        <h3>
+        Expression
+        </h3>
+
+        <p>
+        ${data.expression}
+        </p>
+
+        <h3>
+        Answer
+        </h3>
+
+        <p>
+        ${data.result}
+        </p>
+        `;
 
         addHistory(
             data.expression,
             data.result
         );
 
-    } catch(error) {
+    } catch(error){
 
         console.error(error);
 
         resultDiv.innerHTML =
-            "OCR Processing Failed";
+            "OCR Failed";
     }
 }
 
@@ -211,26 +243,6 @@ function addHistory(
     historyList.prepend(li);
 }
 
-function openHistory() {
-
-    window.open(
-        "http://localhost:8080/api/history",
-        "_blank"
-    );
-}
-
-// ==========================
-// Dashboard
-// ==========================
-
-function openDashboard() {
-
-    window.open(
-        "dashboard.html",
-        "_blank"
-    );
-}
-
 // ==========================
 // Teach Me
 // ==========================
@@ -242,7 +254,7 @@ async function teachTopic() {
             "Enter Topic"
         );
 
-    if (!topic) {
+    if(!topic){
         return;
     }
 
@@ -262,7 +274,7 @@ async function teachTopic() {
                 "<br>"
             );
 
-    } catch(error) {
+    } catch(error){
 
         resultDiv.innerHTML =
             "Unable to load lesson";
@@ -270,29 +282,77 @@ async function teachTopic() {
 }
 
 // ==========================
-// Progress
-// ==========================
-
-function showProgress() {
-
-    resultDiv.innerHTML =
-        `
-        <h3>Learning Progress</h3>
-        <p>Feature Available In Dashboard</p>
-        `;
-}
-
-// ==========================
 // Memory
 // ==========================
 
-function showMemory() {
+async function showMemory() {
 
-    resultDiv.innerHTML =
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:8080/api/memory"
+            );
+
+        const memories =
+            await response.json();
+
+        if(memories.length===0){
+
+            resultDiv.innerHTML =
+                "<h3>No Memory Available</h3>";
+
+            return;
+        }
+
+        let html =
+            "<h2>🧠 Conversation Memory</h2>";
+
+        memories.reverse().forEach(memory=>{
+
+            html +=
+            `
+            <div class="memory-card">
+
+                <b>You:</b>
+                ${memory.userInput}
+
+                <br><br>
+
+                <b>Assistant:</b>
+                ${memory.assistantResponse}
+
+            </div>
+            `;
+        });
+
+        html +=
         `
-        <h3>Conversation Memory</h3>
-        <p>Coming Soon</p>
+        <button onclick="clearMemory()">
+            Clear Memory
+        </button>
         `;
+
+        resultDiv.innerHTML =
+            html;
+
+    } catch(error){
+
+        resultDiv.innerHTML =
+            "Unable to load memory";
+    }
+}
+
+async function clearMemory() {
+
+    await fetch(
+        "http://localhost:8080/api/memory",
+        {
+            method:"DELETE"
+        }
+    );
+
+    showMemory();
 }
 
 // ==========================
@@ -306,8 +366,50 @@ function startQuiz() {
         "_blank"
     );
 }
+
 // ==========================
-// Speak Result
+// Dashboard
+// ==========================
+
+function openDashboard() {
+
+    window.open(
+        "dashboard.html",
+        "_blank"
+    );
+}
+
+function openAnalytics() {
+
+    window.open(
+        "dashboard-advanced.html",
+        "_blank"
+    );
+}
+
+// ==========================
+// Profile
+// ==========================
+
+function openProfile() {
+
+    window.open(
+        "profile.html",
+        "_blank"
+    );
+}
+
+// ==========================
+// Progress
+// ==========================
+
+function showProgress() {
+
+    openAnalytics();
+}
+
+// ==========================
+// Voice Output
 // ==========================
 
 function speakResult(text) {
@@ -343,80 +445,32 @@ clearBtn.addEventListener(
             "";
     }
 );
-async function showMemory() {
+function openRecommendation() {
 
-    try {
-
-        const response =
-            await fetch(
-                "http://localhost:8080/api/memory"
-            );
-
-        const memories =
-            await response.json();
-
-        if (memories.length === 0) {
-
-            resultDiv.innerHTML =
-                "<h3>No Memory Available</h3>";
-
-            return;
-        }
-
-        let html =
-            "<h2>🧠 Conversation Memory</h2>";
-
-        memories.reverse().forEach(memory => {
-
-            html += `
-            <div style="
-                background:#f5f5f5;
-                padding:15px;
-                margin:10px 0;
-                border-radius:10px;
-            ">
-                <b>You:</b>
-                ${memory.userInput}
-                <br><br>
-                <b>Assistant:</b>
-                ${memory.assistantResponse}
-            </div>
-            `;
-        });
-
-        html += `
-            <button onclick="clearMemory()">
-                Clear Memory
-            </button>
-        `;
-
-        resultDiv.innerHTML = html;
-
-    } catch(error) {
-
-        console.error(error);
-
-        resultDiv.innerHTML =
-            "Unable to load memory";
-    }
-}
-async function clearMemory() {
-
-    const confirmDelete =
-        confirm(
-            "Delete all memory?"
-        );
-
-    if (!confirmDelete) {
-        return;
-    }
-
-    await fetch(
-        "http://localhost:8080/api/memory",
-        {
-            method: "DELETE"
-        }
+    window.open(
+        "recommendation.html",
+        "_blank"
     );
+}
+function openAnalytics() {
 
-    showMemory();
+    window.open(
+        "analytics.html",
+        "_blank"
+    );
+}
+function openReport() {
+
+    window.location.href =
+        "report.html";
+}
+function openStudyPlan() {
+
+    window.location.href =
+        "studyplan.html";
+}
+function openLeaderboard() {
+
+    window.location.href =
+        "leaderboard.html";
 }

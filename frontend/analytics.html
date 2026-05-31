@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics Dashboard</title>
+
+    <link rel="stylesheet"
+          href="analytics.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 Analytics Dashboard</h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>Total Calculations</h2>
+            <p id="totalCalculations">0</p>
+        </div>
+
+        <div class="card">
+            <h2>Average Score</h2>
+            <p id="averageScore">0</p>
+        </div>
+
+        <div class="card">
+            <h2>Achievements</h2>
+            <p id="totalAchievements">0</p>
+        </div>
+
+        <div class="card">
+            <h2>Performance</h2>
+            <p id="performance">Loading...</p>
+        </div>
+
+    </div>
+
+    <div class="chart-container">
+
+        <h2>📈 Learning Analytics</h2>
+
+        <canvas id="analyticsChart">
+
+        </canvas>
+
+    </div>
+
+</div>
+
+<script src="analytics.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+body{
+
+    font-family:Segoe UI;
+
+    background:#eef2f7;
+
+    padding:40px;
+}
+
+.container{
+
+    max-width:800px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+h1{
+
+    text-align:center;
+
+    color:#1976d2;
+}
+
+.card{
+
+    margin-top:30px;
+
+    padding:25px;
+
+    background:#f8f9fa;
+
+    border-radius:15px;
+}
+
+ul{
+
+    margin-top:15px;
+}

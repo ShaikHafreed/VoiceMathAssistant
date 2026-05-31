@@ -15,10 +15,10 @@ public class ConversationMemory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String userInput;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String assistantResponse;
 
     public ConversationMemory() {
@@ -40,9 +40,7 @@ public class ConversationMemory {
         return userInput;
     }
 
-    public void setUserInput(
-            String userInput) {
-
+    public void setUserInput(String userInput) {
         this.userInput = userInput;
     }
 
@@ -53,7 +51,6 @@ public class ConversationMemory {
     public void setAssistantResponse(
             String assistantResponse) {
 
-        this.assistantResponse =
-                assistantResponse;
+        this.assistantResponse = assistantResponse;
     }
 }

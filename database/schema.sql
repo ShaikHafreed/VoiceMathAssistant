@@ -21,3 +21,13 @@ CREATE TABLE IF NOT EXISTS learning_progress (
     score DOUBLE,
     last_attempt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE IF NOT EXISTS achievements (
+
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+
+    title VARCHAR(255),
+
+    description VARCHAR(500),
+
+    achieved BOOLEAN
+);

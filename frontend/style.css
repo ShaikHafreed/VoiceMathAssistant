@@ -11,7 +11,7 @@ body{
 
     min-height:100vh;
 
-    padding:40px;
+    padding:30px;
 }
 
 .container{
@@ -22,12 +22,12 @@ body{
 
     background:white;
 
-    padding:40px;
+    padding:30px;
 
     border-radius:20px;
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,.1);
+    0 10px 30px rgba(0,0,0,.08);
 }
 
 .hero{
@@ -39,7 +39,7 @@ body{
 
 .hero h1{
 
-    color:#1565c0;
+    color:#1976d2;
 
     font-size:42px;
 
@@ -57,11 +57,11 @@ input[type="text"]{
 
     width:100%;
 
-    padding:18px;
+    padding:15px;
 
     border:2px solid #ddd;
 
-    border-radius:12px;
+    border-radius:10px;
 
     margin-bottom:20px;
 
@@ -79,7 +79,7 @@ input[type="file"]{
 
     flex-wrap:wrap;
 
-    gap:12px;
+    gap:10px;
 
     margin-bottom:15px;
 }
@@ -92,7 +92,7 @@ button{
 
     color:white;
 
-    padding:14px 20px;
+    padding:12px 18px;
 
     border-radius:10px;
 
@@ -108,30 +108,18 @@ button:hover{
 
 .card{
 
-    margin-top:25px;
+    margin-top:20px;
 
-    background:#fafafa;
+    background:#f8f9fa;
 
-    padding:25px;
+    padding:20px;
 
     border-radius:15px;
-
-    box-shadow:
-    0 4px 12px rgba(0,0,0,.08);
-}
-
-.card h2{
-
-    margin-bottom:15px;
-
-    color:#1565c0;
 }
 
 #result{
 
-    min-height:120px;
-
-    font-size:18px;
+    min-height:100px;
 }
 
 #history{
@@ -145,11 +133,60 @@ button:hover{
 
     padding:12px;
 
+    border-radius:10px;
+
     margin-bottom:10px;
+
+    border-left:5px solid #1976d2;
+}
+
+.answer-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.08);
+}
+
+.answer{
+
+    font-size:36px;
+
+    font-weight:bold;
+
+    color:#1976d2;
+
+    margin:15px 0;
+}
+
+.explanation{
+
+    background:#f5f5f5;
+
+    padding:15px;
 
     border-radius:10px;
 
-    border-left:5px solid #1565c0;
+    white-space:pre-wrap;
+
+    line-height:1.7;
+}
+
+.memory-card{
+
+    background:white;
+
+    padding:15px;
+
+    margin:10px 0;
+
+    border-radius:10px;
+
+    border-left:5px solid #1976d2;
 }
 
 @media(max-width:768px){
@@ -166,6 +203,6 @@ button:hover{
 
     .hero h1{
 
-        font-size:30px;
+        font-size:32px;
     }
 }

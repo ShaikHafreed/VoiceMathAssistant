@@ -1,0 +1,71 @@
+body{
+
+    margin:0;
+
+    font-family:Segoe UI;
+
+    background:#eef2f7;
+
+    padding:30px;
+}
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+}
+
+h1{
+
+    text-align:center;
+
+    color:#1976d2;
+
+    margin-bottom:30px;
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:20px;
+}
+
+.card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.1);
+}
+
+.card p{
+
+    font-size:28px;
+
+    font-weight:bold;
+}
+
+.chart-card{
+
+    background:white;
+
+    margin-top:30px;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.1);
+}

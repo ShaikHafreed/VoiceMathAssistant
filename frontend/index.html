@@ -1,17 +1,20 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Voice Math Assistant</title>
+<title>Voice Math Assistant</title>
 
-    <link rel="stylesheet"
-          href="style.css">
+<link rel="stylesheet"
+      href="style.css">
+```
 
 </head>
 
@@ -19,107 +22,134 @@
 
 <div class="container">
 
-    <div class="hero">
+```
+<div class="hero">
 
-        <h1>🎤 Voice Math Assistant</h1>
+    <h1>🎤 Voice Math Assistant</h1>
 
-        <p>
-            AI Powered Voice Recognition,
-            OCR Scanner,
-            Dashboard,
-            Quiz and Math Solver
-        </p>
+    <p>
+        Voice Recognition,
+        OCR Scanner,
+        Dashboard,
+        Quiz,
+        AI Tutor and Math Solver
+    </p>
 
-    </div>
+</div>
+
+<input
+        type="text"
+        id="expression"
+        placeholder="Speak or type your math problem">
+
+<div class="buttons">
+
+    <button id="voiceBtn">
+        🎙 Start Voice
+    </button>
+
+    <button id="calculateBtn">
+        🧮 Calculate
+    </button>
+
+    <button id="clearBtn">
+        🧹 Clear
+    </button>
+
+</div>
+
+<div class="buttons">
+
+    <button onclick="teachTopic()">
+        📚 Teach Me
+    </button>
+
+    <button onclick="showProgress()">
+        📈 Learning Progress
+    </button>
+
+    <button onclick="openStudyPlan()">
+        🗓 Study Planner
+    </button>
+
+    <button onclick="showMemory()">
+        🧠 Memory
+    </button>
+
+    <button onclick="openRecommendation()">
+        🎯 Recommendation
+    </button>
+
+    <button onclick="openAnalytics()">
+        📊 Analytics
+    </button>
+
+    <button onclick="openLeaderboard()">
+        🏆 Leaderboard
+    </button>
+
+    <button onclick="openReport()">
+        📄 Report
+    </button>
+
+    <button onclick="openProfile()">
+        👤 Profile
+    </button>
+
+</div>
+
+<div class="buttons">
+
+    <button onclick="startQuiz()">
+        📝 Quiz
+    </button>
+
+    <button onclick="openHistory()">
+        📜 History
+    </button>
+
+    <button onclick="openDashboard()">
+        📊 Dashboard
+    </button>
+
+</div>
+
+<div class="card">
+
+    <h2>📷 OCR Math Solver</h2>
 
     <input
-            type="text"
-            id="expression"
-            placeholder="Speak or type your math problem">
+            type="file"
+            id="ocrFile">
 
-    <div class="buttons">
+    <button onclick="scanOCRImage()">
+        Scan Math Image
+    </button>
 
-        <button id="voiceBtn">
-            🎙 Start Voice
-        </button>
+</div>
 
-        <button id="calculateBtn">
-            🧮 Calculate
-        </button>
+<div class="card">
 
-        <button id="clearBtn">
-            🧹 Clear
-        </button>
+    <h2>📊 Result</h2>
 
-    </div>
+    <div id="result">
 
-    <div class="buttons">
-
-        <button onclick="teachTopic()">
-            📚 Teach Me
-        </button>
-
-        <button onclick="showProgress()">
-            📈 Learning Progress
-        </button>
-
-        <button onclick="showMemory()">
-            🧠 Memory
-        </button>
+        Waiting...
 
     </div>
 
-    <div class="buttons">
+</div>
 
-        <button onclick="startQuiz()">
-            📝 Quiz
-        </button>
+<div class="card">
 
-        <button onclick="openHistory()">
-            📜 History
-        </button>
+    <h2>📜 History</h2>
 
-        <button onclick="openDashboard()">
-            📊 Dashboard
-        </button>
+    <ul id="history">
 
-    </div>
+    </ul>
 
-    <div class="card">
-
-        <h2>📷 OCR Math Solver</h2>
-
-        <input
-                type="file"
-                id="ocrFile">
-
-        <button onclick="scanOCRImage()">
-            Scan Math Image
-        </button>
-
-    </div>
-
-    <div class="card">
-
-        <h2>📊 Result</h2>
-
-        <div id="result">
-
-            Waiting...
-
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <h2>📜 History</h2>
-
-        <ul id="history">
-
-        </ul>
-
-    </div>
+</div>
+```
 
 </div>
 

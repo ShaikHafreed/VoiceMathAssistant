@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        Advanced Dashboard
+    </title>
+
+    <link rel="stylesheet"
+          href="dashboard-advanced.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        📊 Learning Analytics Dashboard
+    </h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Calculations</h3>
+            <p id="calculations">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Average Score</h3>
+            <p id="score">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Level</h3>
+            <p id="level">Beginner</p>
+        </div>
+
+        <div class="card">
+            <h3>Achievements</h3>
+            <p id="achievements">0</p>
+        </div>
+
+    </div>
+
+    <div class="chart-card">
+
+        <canvas id="scoreChart">
+
+        </canvas>
+
+    </div>
+
+</div>
+
+<script src="dashboard-advanced.js"></script>
+
+</body>
+
+</html>
