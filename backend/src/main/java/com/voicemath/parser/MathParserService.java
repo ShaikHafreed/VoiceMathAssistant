@@ -46,32 +46,52 @@ public class MathParserService {
 
     public String parse(String speech) {
 
-        if (speech == null) {
+        if (speech == null || speech.isBlank()) {
             return "";
         }
+        speech = speech.replace("percent of", "%");
+        speech = speech.replace("percentage of", "%");
 
         speech = speech.toLowerCase().trim();
 
         speech = speech.replace("what is", "");
         speech = speech.replace("how much is", "");
         speech = speech.replace("calculate", "");
+        speech = speech.replace("solve", "");
+
+        speech = speech.replace("cube root of", "cbrt ");
+        speech = speech.replace("cube root", "cbrt ");
 
         speech = speech.replace("square root of", "sqrt ");
-        speech = speech.replace("cube root of", "cbrt ");
+        speech = speech.replace("square root", "sqrt ");
+
+        speech = speech.replace("root of", "sqrt ");
+        speech = speech.replace("root", "sqrt ");
 
         speech = speech.replace("to the power of", "^");
         speech = speech.replace("raised to", "^");
-        speech = speech.replace("power", "^");
+        speech = speech.replace("power of", "^");
 
         speech = speech.replace("percent of", "%");
         speech = speech.replace("percentage of", "%");
 
         speech = speech.replace("multiplied by", "*");
+        speech = speech.replace("multiply by", "*");
+        speech = speech.replace("multiply", "*");
+        speech = speech.replace("multiplys", "*");
+        speech = speech.replace("multiplies", "*");
+
         speech = speech.replace("times", "*");
+        speech = speech.replace("timess", "*");
+        speech = speech.replace("time's", "*");
+        speech = speech.replace("time is", "*");
+
         speech = speech.replace("into", "*");
+        speech = speech.replace(" x ", "*");
 
         speech = speech.replace("divided by", "/");
         speech = speech.replace("divide by", "/");
+        speech = speech.replace("over", "/");
 
         speech = speech.replace("plus", "+");
         speech = speech.replace("minus", "-");
@@ -80,9 +100,11 @@ public class MathParserService {
 
         speech = convertWordsToNumbers(speech);
 
-        speech = speech.replaceAll("\\s+", " ").trim();
+        speech = speech.replaceAll("\\s+", "");
 
         System.out.println("PARSED = " + speech);
+        System.out.println("FINAL PARSED = " + speech);
+        System.out.println("BEFORE RETURN = " + speech);
 
         return speech;
     }

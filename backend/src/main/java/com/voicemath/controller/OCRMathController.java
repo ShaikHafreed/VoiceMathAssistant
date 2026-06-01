@@ -55,17 +55,15 @@ public class OCRMathController {
         String ocrText =
                 ocrService.extractText(tempFile);
 
-String cleanedText = ocrText;
+        String cleanedText = ocrText;
 
-cleanedText = cleanedText.replace("\n", " ");
-cleanedText = cleanedText.replace("\r", " ");
-cleanedText = cleanedText.replace("=", " ");
-cleanedText = cleanedText.replace("%", "5");
-cleanedText = cleanedText.replace("/", "");
-cleanedText = cleanedText.replaceAll("\\s+", " ").trim();
+        cleanedText = cleanedText.replace("\n", " ");
+        cleanedText = cleanedText.replace("\r", " ");
+        cleanedText = cleanedText.replace("=", "");
+        cleanedText = cleanedText.replaceAll("\\s+", " ").trim();
 
-System.out.println("OCR TEXT = " + ocrText);
-System.out.println("CLEANED TEXT = " + cleanedText);
+        System.out.println("OCR TEXT = " + ocrText);
+        System.out.println("CLEANED TEXT = " + cleanedText);
 
         String expression =
                 parserService.parse(cleanedText);

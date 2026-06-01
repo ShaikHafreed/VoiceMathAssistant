@@ -1,5 +1,7 @@
 package com.voicemath.engine;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,7 +11,7 @@ public class MathEngineService {
 
         try {
 
-            expression = expression.trim();
+            expression = expression.trim().toLowerCase();
 
             if (expression.startsWith("sqrt")) {
 
@@ -17,8 +19,7 @@ public class MathEngineService {
                         Double.parseDouble(
                                 expression.replace("sqrt", "").trim());
 
-                return String.valueOf(
-                        Math.sqrt(value));
+                return String.valueOf(Math.sqrt(value));
             }
 
             if (expression.startsWith("cbrt")) {
@@ -27,8 +28,7 @@ public class MathEngineService {
                         Double.parseDouble(
                                 expression.replace("cbrt", "").trim());
 
-                return String.valueOf(
-                        Math.cbrt(value));
+                return String.valueOf(Math.cbrt(value));
             }
 
             if (expression.startsWith("log")) {
@@ -37,8 +37,7 @@ public class MathEngineService {
                         Double.parseDouble(
                                 expression.replace("log", "").trim());
 
-                return String.valueOf(
-                        Math.log10(value));
+                return String.valueOf(Math.log10(value));
             }
 
             if (expression.startsWith("sin")) {
@@ -71,21 +70,6 @@ public class MathEngineService {
                         Math.tan(Math.toRadians(value)));
             }
 
-            if (expression.contains("^")) {
-
-                String[] parts =
-                        expression.split("\\^");
-
-                double a =
-                        Double.parseDouble(parts[0].trim());
-
-                double b =
-                        Double.parseDouble(parts[1].trim());
-
-                return String.valueOf(
-                        Math.pow(a, b));
-            }
-
             if (expression.contains("%")) {
 
                 String[] parts =
@@ -98,55 +82,24 @@ public class MathEngineService {
                         Double.parseDouble(parts[1].trim());
 
                 return String.valueOf(
-                        (percent / 100) * total);
+                        (percent / 100.0) * total);
             }
 
-            if (expression.contains("+")) {
+            Expression exp =
+                    new ExpressionBuilder(expression)
+                            .build();
 
-                String[] parts =
-                        expression.split("\\+");
+            double result = exp.evaluate();
 
-                return String.valueOf(
-                        Double.parseDouble(parts[0].trim())
-                                + Double.parseDouble(parts[1].trim()));
+            if (result == (long) result) {
+                return String.valueOf((long) result);
             }
 
-            if (expression.contains("-")) {
-
-                String[] parts =
-                        expression.split("-");
-
-                return String.valueOf(
-                        Double.parseDouble(parts[0].trim())
-                                - Double.parseDouble(parts[1].trim()));
-            }
-
-            if (expression.contains("*")) {
-
-                String[] parts =
-                        expression.split("\\*");
-
-                return String.valueOf(
-                        Double.parseDouble(parts[0].trim())
-                                * Double.parseDouble(parts[1].trim()));
-            }
-
-            if (expression.contains("/")) {
-
-                String[] parts =
-                        expression.split("/");
-
-                return String.valueOf(
-                        Double.parseDouble(parts[0].trim())
-                                / Double.parseDouble(parts[1].trim()));
-            }
-
-            return "Unsupported Expression";
+            return String.valueOf(result);
 
         } catch (Exception e) {
 
             e.printStackTrace();
-
             return "Invalid Expression";
         }
     }
