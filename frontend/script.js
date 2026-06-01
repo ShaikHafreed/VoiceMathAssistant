@@ -16,6 +16,11 @@ const calculateBtn =
 const clearBtn =
     document.getElementById("clearBtn");
 
+const toggleSpeechBtn =
+    document.getElementById("toggleSpeechBtn");
+
+let speechEnabled = true;
+
 // ==========================
 // Voice Recognition
 // ==========================
@@ -30,26 +35,65 @@ if (SpeechRecognition) {
         new SpeechRecognition();
 
     recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    let isListening = false;
 
     voiceBtn.addEventListener(
         "click",
         () => {
+
+            if (isListening) {
+                return;
+            }
+
             recognition.start();
         }
     );
 
-    recognition.onresult =
-        (event) => {
+    recognition.onstart = () => {
 
-            expressionInput.value =
-                event.results[0][0].transcript;
-        };
+        isListening = true;
 
+        voiceBtn.innerText =
+            "🎙 Listening...";
+    };
+
+recognition.onresult = (event) => {
+
+    const transcript =
+        event.results[0][0].transcript;
+
+    expressionInput.value =
+        transcript;
+
+    setTimeout(() => {
+        calculateExpression();
+    }, 300);
+};
+
+recognition.onerror = (event) => {
+
+    console.log("Speech Error:", event.error);
+
+    isListening = false;
+
+    voiceBtn.innerText =
+        "🎙 Start Voice";
+};
+
+recognition.onend = () => {
+
+    isListening = false;
+
+    voiceBtn.innerText =
+        "🎙 Start Voice";
+};
 } else {
 
     voiceBtn.disabled = true;
 }
-
 // ==========================
 // Calculate
 // ==========================
@@ -78,15 +122,15 @@ async function calculateExpression() {
             await fetch(
                 "http://localhost:8080/api/calculate",
                 {
-                    method:"POST",
+                    method: "POST",
 
-                    headers:{
+                    headers: {
                         "Content-Type":
-                        "application/json"
+                            "application/json"
                     },
 
-                    body:JSON.stringify({
-                        speech:speech
+                    body: JSON.stringify({
+                        speech: speech
                     })
                 }
             );
@@ -94,45 +138,44 @@ async function calculateExpression() {
         const data =
             await response.json();
 
-        const explanationResponse =
-            await fetch(
-                `http://localhost:8080/api/explanation?expression=${encodeURIComponent(data.expression)}&result=${data.result}`
-            );
+resultDiv.innerHTML =
+`
+<div class="answer-card">
 
-        const explanationData =
-            await explanationResponse.json();
+    <h2>✅ Answer</h2>
 
-        resultDiv.innerHTML =
-        `
-        <div class="answer-card">
+    <p class="answer">
+        ${data.result}
+    </p>
 
-            <h2>✅ Answer</h2>
+    <div class="explanation">
 
-            <p class="answer">
-                ${data.result}
-            </p>
+        <h3>
+        📚 Step By Step Solution
+        </h3>
 
-            <hr>
+        <pre>
+${data.steps}
+        </pre>
 
-            <h2>🤖 AI Tutor</h2>
+    </div>
 
-            <pre class="explanation">
-${explanationData.explanation}
-            </pre>
+</div>
+`;
 
-        </div>
-        `;
+addHistory(
+    data.expression,
+    data.result
+);
 
-        addHistory(
-            data.expression,
-            data.result
-        );
+speakResult(
+    "The answer is " +
+    data.result
+);
 
-        speakResult(
-            data.result
-        );
+expressionInput.value = "";
 
-    } catch(error){
+    } catch (error) {
 
         console.error(error);
 
@@ -178,8 +221,8 @@ async function scanOCRImage() {
             await fetch(
                 "http://localhost:8080/api/ocr-math",
                 {
-                    method:"POST",
-                    body:formData
+                    method: "POST",
+                    body: formData
                 }
             );
 
@@ -187,36 +230,31 @@ async function scanOCRImage() {
             await response.json();
 
         resultDiv.innerHTML =
-        `
-        <h2>OCR Result</h2>
+            `
+            <h2>OCR Result</h2>
 
-        <p>
-        ${data.ocrText}
-        </p>
+            <p>${data.ocrText}</p>
 
-        <h3>
-        Expression
-        </h3>
+            <h3>Expression</h3>
 
-        <p>
-        ${data.expression}
-        </p>
+            <p>${data.expression}</p>
 
-        <h3>
-        Answer
-        </h3>
+            <h3>Answer</h3>
 
-        <p>
-        ${data.result}
-        </p>
-        `;
+            <p>${data.result}</p>
+            `;
 
         addHistory(
             data.expression,
             data.result
         );
 
-    } catch(error){
+        speakResult(
+            "The answer is " +
+            data.result
+        );
+
+    } catch (error) {
 
         console.error(error);
 
@@ -244,44 +282,6 @@ function addHistory(
 }
 
 // ==========================
-// Teach Me
-// ==========================
-
-async function teachTopic() {
-
-    const topic =
-        prompt(
-            "Enter Topic"
-        );
-
-    if(!topic){
-        return;
-    }
-
-    try {
-
-        const response =
-            await fetch(
-                `http://localhost:8080/api/tutor/${topic}`
-            );
-
-        const data =
-            await response.text();
-
-        resultDiv.innerHTML =
-            data.replace(
-                /\n/g,
-                "<br>"
-            );
-
-    } catch(error){
-
-        resultDiv.innerHTML =
-            "Unable to load lesson";
-    }
-}
-
-// ==========================
 // Memory
 // ==========================
 
@@ -297,7 +297,7 @@ async function showMemory() {
         const memories =
             await response.json();
 
-        if(memories.length===0){
+        if (memories.length === 0) {
 
             resultDiv.innerHTML =
                 "<h3>No Memory Available</h3>";
@@ -308,35 +308,35 @@ async function showMemory() {
         let html =
             "<h2>🧠 Conversation Memory</h2>";
 
-        memories.reverse().forEach(memory=>{
+        memories.reverse().forEach(memory => {
 
             html +=
-            `
-            <div class="memory-card">
+                `
+                <div class="memory-card">
 
-                <b>You:</b>
-                ${memory.userInput}
+                    <b>You:</b>
+                    ${memory.userInput}
 
-                <br><br>
+                    <br><br>
 
-                <b>Assistant:</b>
-                ${memory.assistantResponse}
+                    <b>Assistant:</b>
+                    ${memory.assistantResponse}
 
-            </div>
-            `;
+                </div>
+                `;
         });
 
         html +=
-        `
-        <button onclick="clearMemory()">
-            Clear Memory
-        </button>
-        `;
+            `
+            <button onclick="clearMemory()">
+                Clear Memory
+            </button>
+            `;
 
         resultDiv.innerHTML =
             html;
 
-    } catch(error){
+    } catch (error) {
 
         resultDiv.innerHTML =
             "Unable to load memory";
@@ -348,7 +348,7 @@ async function clearMemory() {
     await fetch(
         "http://localhost:8080/api/memory",
         {
-            method:"DELETE"
+            method: "DELETE"
         }
     );
 
@@ -379,10 +379,14 @@ function openDashboard() {
     );
 }
 
+// ==========================
+// Analytics
+// ==========================
+
 function openAnalytics() {
 
     window.open(
-        "dashboard-advanced.html",
+        "analytics.html",
         "_blank"
     );
 }
@@ -414,16 +418,48 @@ function showProgress() {
 
 function speakResult(text) {
 
+    if (!speechEnabled) {
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
     const speech =
         new SpeechSynthesisUtterance(
             text
         );
 
-    speech.lang =
-        "en-US";
+    speech.lang = "en-US";
+
+    speech.rate = 1;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
 
     window.speechSynthesis.speak(
         speech
+    );
+}
+
+// ==========================
+// Voice Toggle
+// ==========================
+
+if (toggleSpeechBtn) {
+
+    toggleSpeechBtn.addEventListener(
+        "click",
+        () => {
+
+            speechEnabled =
+                !speechEnabled;
+
+            toggleSpeechBtn.innerText =
+                speechEnabled
+                    ? "🔊 Voice ON"
+                    : "🔇 Voice OFF";
+        }
     );
 }
 
@@ -445,6 +481,11 @@ clearBtn.addEventListener(
             "";
     }
 );
+
+// ==========================
+// Recommendation
+// ==========================
+
 function openRecommendation() {
 
     window.open(
@@ -452,25 +493,60 @@ function openRecommendation() {
         "_blank"
     );
 }
-function openAnalytics() {
 
-    window.open(
-        "analytics.html",
-        "_blank"
-    );
-}
+// ==========================
+// Report
+// ==========================
+
 function openReport() {
 
     window.location.href =
         "report.html";
 }
+
+// ==========================
+// Study Planner
+// ==========================
+
 function openStudyPlan() {
 
     window.location.href =
         "studyplan.html";
 }
+
+// ==========================
+// Leaderboard
+// ==========================
+
 function openLeaderboard() {
 
     window.location.href =
         "leaderboard.html";
+}
+
+// ==========================
+// History Page
+// ==========================
+
+function openHistory() {
+
+    window.location.href =
+        "history.html";
+}
+
+// ==========================
+// Removed AI Tutor
+// ==========================
+
+function teachTopic() {
+
+    resultDiv.innerHTML =
+        `
+        <h2>📚 AI Tutor Removed</h2>
+
+        <p>
+        Gemini integration has been removed.
+        This feature is currently disabled.
+        </p>
+        `;
 }
