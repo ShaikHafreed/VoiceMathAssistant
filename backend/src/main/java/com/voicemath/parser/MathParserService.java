@@ -70,6 +70,9 @@ public class MathParserService {
 
         speech = speech.replace("to the power of", "^");
         speech = speech.replace("raised to", "^");
+        speech = speech.replace("x squared", "x^2");
+        speech = speech.replace("x square", "x^2");
+        speech = speech.replace("x²", "x^2");
         speech = speech.replace("power of", "^");
 
         speech = speech.replace("percent of", "%");
@@ -81,11 +84,24 @@ public class MathParserService {
         speech = speech.replace("multiplys", "*");
         speech = speech.replace("multiplies", "*");
 
+        speech = speech.replace("sine", "sin ");
+        speech = speech.replace("cosine", "cos ");
+        speech = speech.replace("tangent", "tan ");
+
+        speech = speech.replace("natural log", "ln ");
+        speech = speech.replace("natural logarithm", "ln ");
+        speech = speech.replace("logarithm", "log ");
+
         speech = speech.replace("times", "*");
         speech = speech.replace("timess", "*");
         speech = speech.replace("time's", "*");
         speech = speech.replace("time is", "*");
+        speech = speech.replace("equals", "=");
+        speech = speech.replace("equal to", "=");
 
+        speech = speech.replace("x squared", "x^2");
+        speech = speech.replace("x square", "x^2");
+        speech = speech.replace("x²", "x^2");
         speech = speech.replace("into", "*");
         speech = speech.replace(" x ", "*");
 
@@ -100,7 +116,25 @@ public class MathParserService {
 
         speech = convertWordsToNumbers(speech);
 
-        speech = speech.replaceAll("\\s+", "");
+        speech = speech.replace("mean of", "mean ");
+        speech = speech.replace("average of", "average ");
+        speech = speech.replace("median of", "median ");
+        speech = speech.replace("mode of", "mode ");
+        speech = speech.replace("variance of", "variance ");
+        speech = speech.replace("standard deviation of", "standarddeviation ");
+
+boolean statisticsQuery =
+        speech.startsWith("mean")
+        || speech.startsWith("average")
+        || speech.startsWith("median")
+        || speech.startsWith("mode")
+        || speech.startsWith("variance")
+        || speech.startsWith("standarddeviation");
+
+if (!statisticsQuery) {
+
+    speech = speech.replaceAll("\\s+", "");
+}
 
         System.out.println("PARSED = " + speech);
         System.out.println("FINAL PARSED = " + speech);

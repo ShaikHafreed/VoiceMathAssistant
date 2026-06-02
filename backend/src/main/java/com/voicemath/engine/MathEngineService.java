@@ -39,6 +39,15 @@ public class MathEngineService {
 
                 return String.valueOf(Math.log10(value));
             }
+            if (expression.startsWith("ln")) {
+
+    double value =
+            Double.parseDouble(
+                    expression.replace("ln", "").trim());
+
+    return String.valueOf(
+            Math.log(value));
+}
 
             if (expression.startsWith("sin")) {
 
