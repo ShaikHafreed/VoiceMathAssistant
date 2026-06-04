@@ -1,167 +1,198 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-```
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <title>Voice Math Assistant</title>
 
-<title>Voice Math Assistant</title>
-
-<link rel="stylesheet"
-      href="style.css">
-```
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/animations.css">
 
 </head>
 
 <body>
 
-<div class="container">
+<div class="app-layout">
 
-```
-<div class="hero">
+    <!-- Sidebar -->
 
-    <h1>🎤 Voice Math Assistant</h1>
+    <aside class="sidebar">
 
-    <p>
-        Voice Recognition,
-        OCR Scanner,
-        Dashboard,
-        Quiz and Math Solver
-    </p>
+        <div class="logo-area">
 
-</div>
+            <img src="assets/logo.png" class="logo">
 
-<input
-        type="text"
-        id="expression"
-        placeholder="Speak or type your math problem">
+            <h2>VoiceMath AI</h2>
 
-<div class="buttons">
+        </div>
 
-    <button id="voiceBtn">
-        🎙 Start Voice
-    </button>
+        <ul class="menu">
 
-    <button id="calculateBtn">
-        🧮 Calculate
-    </button>
+            <li onclick="openDashboard()">📊 Dashboard</li>
+            <li onclick="openTutor()">🎓 AI Tutor</li>
 
-    <button id="clearBtn">
-        🧹 Clear
-    </button>
+            <li onclick="startQuiz()">📝 Quiz</li>
 
-    <button id="toggleSpeechBtn">
-        🔊 Voice ON
-    </button>
+            <li onclick="showMemory()">🧠 Memory</li>
 
-</div>
+            <li onclick="openStudyPlan()">📅 Planner</li>
 
-<div class="buttons">
+            <li onclick="openAnalytics()">📈 Analytics</li>
 
-    <button onclick="teachTopic()">
-        📚 Teach Me
-    </button>
+            <li onclick="openLeaderboard()">🏆 Leaderboard</li>
 
-    <button onclick="showProgress()">
-        📈 Learning Progress
-    </button>
+            <li onclick="openProfile()">👤 Profile</li>
 
-    <button onclick="openStudyPlan()">
-        🗓 Study Planner
-    </button>
+        </ul>
 
-    <button onclick="showMemory()">
-        🧠 Memory
-    </button>
+    </aside>
 
-    <button onclick="openRecommendation()">
-        🎯 Recommendation
-    </button>
+    <!-- Main Content -->
 
-    <button onclick="openAnalytics()">
-        📊 Analytics
-    </button>
+    <main class="main-content">
 
-    <button onclick="openLeaderboard()">
-        🏆 Leaderboard
-    </button>
+        <div class="hero-banner">
 
-    <button onclick="openReport()">
-        📄 Report
-    </button>
+            <div class="hero-text">
 
-    <button onclick="openProfile()">
-        👤 Profile
-    </button>
+                <h1>🎤 Voice Based Intelligent Mathematics Assistant</h1>
 
-</div>
+                <p>
+                    Solve Math using Voice, OCR, Algebra,
+                    Geometry, Statistics and Scientific Calculations.
+                </p>
 
-<div class="buttons">
+            </div>
 
-    <button onclick="startQuiz()">
-        📝 Quiz
-    </button>
+            <button id="themeToggle">
+                🌙 Dark Mode
+            </button>
 
-    <button onclick="openHistory()">
-        📜 History
-    </button>
+        </div>
 
-    <button onclick="openDashboard()">
-        📊 Dashboard
-    </button>
+        <!-- Dashboard Cards -->
 
-</div>
+        <div class="stats-grid">
 
-<div class="card">
+            <div class="stat-card">
 
-    <h2>📷 OCR Math Solver</h2>
+                <h3>Total Solved</h3>
 
-    <input
-            type="file"
-            id="ocrFile">
+                <span id="totalSolved">0</span>
 
-    <button onclick="scanOCRImage()">
-        Scan Math Image
-    </button>
+            </div>
 
-</div>
+            <div class="stat-card">
 
-<div class="card">
+                <h3>Voice Queries</h3>
 
-    <h2>📊 Result</h2>
+                <span id="voiceCount">0</span>
 
-    <div id="result">
+            </div>
 
-        Waiting...
+            <div class="stat-card">
 
-    </div>
+                <h3>Accuracy</h3>
 
-    <div id="steps">
+                <span>98%</span>
 
-    </div>
+            </div>
 
-</div>
+            <div class="stat-card">
 
-<div class="card">
+                <h3>AI Score</h3>
 
-    <h2>📜 History</h2>
+                <span>100</span>
 
-    <ul id="history">
+            </div>
 
-    </ul>
+        </div>
 
-</div>
-```
+        <!-- Calculator -->
+
+        <div class="glass-card">
+
+            <h2>🧮 Smart Calculator</h2>
+
+            <input
+                    type="text"
+                    id="expression"
+                    placeholder="Speak or type your math problem">
+
+            <div class="buttons">
+
+                <button id="voiceBtn">
+                    🎙 Voice
+                </button>
+
+                <button id="calculateBtn">
+                    🧮 Calculate
+                </button>
+
+                <button id="clearBtn">
+                    🧹 Clear
+                </button>
+
+                <button id="toggleSpeechBtn">
+                    🔊 Voice ON
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- OCR -->
+
+        <div class="glass-card">
+
+            <h2>📷 OCR Scanner</h2>
+
+            <input type="file" id="ocrFile">
+
+            <button onclick="scanOCRImage()">
+                Scan Image
+            </button>
+
+        </div>
+
+        <!-- Result -->
+
+        <div class="glass-card">
+
+            <h2>📚 Result</h2>
+
+            <div id="result">
+
+                Waiting...
+
+            </div>
+
+            <div id="steps"></div>
+
+        </div>
+
+        <!-- History -->
+
+        <div class="glass-card">
+
+            <h2>📜 Recent History</h2>
+
+            <ul id="history"></ul>
+
+        </div>
+
+    </main>
 
 </div>
 
 <script src="script.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/dashboard.js"></script>
 
 </body>
-
 </html>

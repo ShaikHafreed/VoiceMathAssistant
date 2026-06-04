@@ -5,6 +5,7 @@ com\voicemath\service\AlgebraSolverService.class
 com\voicemath\service\StudyPlanService.class
 com\voicemath\model\LearningProgress.class
 com\voicemath\parser\MathParserService.class
+com\voicemath\service\StudyPlannerService.class
 com\voicemath\controller\DashboardController.class
 com\voicemath\dto\RecommendationResponse.class
 com\voicemath\service\RecommendationService.class
@@ -14,6 +15,8 @@ com\voicemath\service\StepByStepService.class
 com\voicemath\controller\AchievementController.class
 com\voicemath\controller\HistoryController.class
 com\voicemath\dto\GraphAnalysisResponse.class
+com\voicemath\controller\AITutorController.class
+com\voicemath\dto\StreakResponse.class
 com\voicemath\repository\StudentProfileRepository.class
 com\voicemath\service\LearningProgressService.class
 com\voicemath\service\DashboardService.class
@@ -21,6 +24,7 @@ com\voicemath\service\QuadraticSolverService.class
 com\voicemath\dto\LeaderboardEntry.class
 com\voicemath\controller\OCRController.class
 com\voicemath\controller\QuizController.class
+com\voicemath\model\Streak.class
 com\voicemath\model\StudentProfile.class
 com\voicemath\controller\CalculationController.class
 com\voicemath\dto\CalculationRequest.class
@@ -30,9 +34,11 @@ com\voicemath\repository\LearningProgressRepository.class
 com\voicemath\repository\CalculationRepository.class
 com\voicemath\analytics\AnalyticsService.class
 com\voicemath\dto\QuizAnswerRequest.class
+com\voicemath\service\StreakService.class
 com\voicemath\service\GeometrySolverService.class
 com\voicemath\dto\QuizQuestionResponse.class
 com\voicemath\dto\QuizResultResponse.class
+com\voicemath\service\AITutorService.class
 com\voicemath\service\CalculationService.class
 com\voicemath\model\ConversationMemory.class
 com\voicemath\dto\GeometryResponse.class
@@ -42,7 +48,10 @@ com\voicemath\parser\SpeechCorrectionService.class
 com\voicemath\ocr\OCRService.class
 com\voicemath\controller\LearningController.class
 com\voicemath\model\Achievement.class
+com\voicemath\service\GamificationService.class
+com\voicemath\repository\StreakRepository.class
 com\voicemath\quiz\QuizService.class
+com\voicemath\dto\GamificationResponse.class
 com\voicemath\dto\OCRMathResponse.class
 com\voicemath\controller\VoiceCalculationController.class
 com\voicemath\controller\LeaderboardController.class
@@ -58,6 +67,7 @@ com\voicemath\controller\OCRMathController.class
 com\voicemath\dto\DashboardResponse.class
 com\voicemath\explanation\ExplanationService.class
 com\voicemath\controller\ProfileController.class
+com\voicemath\dto\TutorResponse.class
 com\voicemath\dto\StatisticsResponse.class
 com\voicemath\service\TutorService.class
 com\voicemath\engine\MathEngineService.class

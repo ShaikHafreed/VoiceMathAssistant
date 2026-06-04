@@ -44,3 +44,28 @@ ul{
 
     margin-top:15px;
 }
+.level-box{
+
+    margin:20px 0;
+
+    background:#1976d2;
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+}
+
+.card li{
+
+    margin:10px 0;
+
+    font-size:18px;
+}

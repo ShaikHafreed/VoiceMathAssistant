@@ -36,11 +36,15 @@ public class RecommendationController {
                         .average()
                         .orElse(0);
 
-        return new RecommendationResponse(
-                service.getTopic(
-                        averageScore),
+return new RecommendationResponse(
 
-                service.getReason(
-                        averageScore));
-    }
-}
+        service.getTopic(
+                averageScore),
+
+        service.getReason(
+                averageScore),
+
+        service.getSuggestedTopics(
+                averageScore)
+);
+    } }

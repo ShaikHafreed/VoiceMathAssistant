@@ -9,15 +9,21 @@ fetch(
 
         <h2>${data.studentName}</h2>
 
-        <p>
-            <strong>Level:</strong>
-            ${data.level}
-        </p>
+        <div class="level-box">
 
-        <p>
-            <strong>Total Calculations:</strong>
-            ${data.totalCalculations}
-        </p>
+    <h3>
+        ${data.level}
+    </h3>
+
+</div>
+
+<p>
+
+    <strong>XP Points:</strong>
+
+    ${data.totalCalculations * 10}
+
+</p>
 
         <p>
             <strong>Average Score:</strong>

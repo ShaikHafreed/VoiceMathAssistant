@@ -10,9 +10,11 @@ fetch(
         data.totalCalculations;
 
     document.getElementById(
-        "averageScore"
-    ).innerText =
-        data.averageScore;
+    "averageScore"
+).innerText =
+Number(
+    data.averageScore
+).toFixed(2);
 
     document.getElementById(
         "totalAchievements"

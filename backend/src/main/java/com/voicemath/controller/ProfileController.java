@@ -1,6 +1,5 @@
 package com.voicemath.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.voicemath.dto.ProfileResponse;
 import com.voicemath.repository.CalculationRepository;
 import com.voicemath.repository.LearningProgressRepository;
+import com.voicemath.service.GamificationService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -17,16 +17,21 @@ public class ProfileController {
 
     private final CalculationRepository calculationRepository;
     private final LearningProgressRepository progressRepository;
+    private final GamificationService gamificationService;
 
     public ProfileController(
             CalculationRepository calculationRepository,
-            LearningProgressRepository progressRepository) {
+            LearningProgressRepository progressRepository,
+            GamificationService gamificationService) {
 
         this.calculationRepository =
                 calculationRepository;
 
         this.progressRepository =
                 progressRepository;
+
+        this.gamificationService =
+                gamificationService;
     }
 
     @GetMapping("/api/profile")
@@ -43,47 +48,26 @@ public class ProfileController {
                         .average()
                         .orElse(0);
 
-        String level;
+        averageScore =
+                Math.round(
+                        averageScore * 100.0)
+                        / 100.0;
 
-        if (calculations >= 100) {
+        long xp =
+                gamificationService
+                        .calculateXP(
+                                calculations);
 
-            level = "Advanced";
-
-        } else if (calculations >= 50) {
-
-            level = "Intermediate";
-
-        } else {
-
-            level = "Beginner";
-        }
+        String level =
+                gamificationService
+                        .calculateLevel(
+                                xp);
 
         List<String> achievements =
-                new ArrayList<>();
-
-        if (calculations >= 10) {
-
-            achievements.add(
-                    "🥉 Beginner Solver");
-        }
-
-        if (calculations >= 50) {
-
-            achievements.add(
-                    "🥈 Active Learner");
-        }
-
-        if (averageScore >= 80) {
-
-            achievements.add(
-                    "🏆 Quiz Master");
-        }
-
-        if (calculations >= 100) {
-
-            achievements.add(
-                    "🥇 Math Champion");
-        }
+                gamificationService
+                        .getAchievements(
+                                calculations,
+                                averageScore);
 
         return new ProfileResponse(
                 "Student",

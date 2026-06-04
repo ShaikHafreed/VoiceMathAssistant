@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="studyplan.css">
+<link rel="stylesheet" href="css/navigation.css">
 
     <title>Study Planner</title>
 
@@ -11,6 +13,19 @@
 </head>
 
 <body>
+    <div class="top-nav">
+
+    <button
+        class="back-btn"
+        onclick="goDashboard()">
+
+        🏠 Dashboard
+
+    </button>
+
+</div>
+
+<script src="js/navigation.js"></script>
 
 <div class="container">
 
@@ -18,15 +33,16 @@
         🗓 Personalized Study Plan
     </h1>
 
-    <div id="plan">
+<div id="plan" class="plan-grid">
 
-        Loading...
+    Loading...
 
-    </div>
+</div>
 
 </div>
 
 <script src="studyplan.js"></script>
+<script src="js/navigation.js"></script>
 
 </body>
 </html>

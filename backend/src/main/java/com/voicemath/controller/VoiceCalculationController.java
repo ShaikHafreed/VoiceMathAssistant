@@ -21,6 +21,7 @@ import com.voicemath.service.QuadraticSolverService;
 import com.voicemath.service.ScientificMathService;
 import com.voicemath.service.StatisticsService;
 import com.voicemath.service.StepByStepService;
+import com.voicemath.service.StreakService;
 
 @RestController
 @RequestMapping("/api")
@@ -40,6 +41,7 @@ public class VoiceCalculationController {
     private final GraphAnalysisService graphAnalysisService;
     private final GeometrySolverService geometrySolverService;
     private final StatisticsService statisticsService;
+    private final StreakService streakService;
 
     public VoiceCalculationController(
             MathParserService parserService,
@@ -53,7 +55,8 @@ public class VoiceCalculationController {
             QuadraticSolverService quadraticSolverService,
             GraphAnalysisService graphAnalysisService,
             GeometrySolverService geometrySolverService,
-            StatisticsService statisticsService) {
+            StatisticsService statisticsService,
+            StreakService streakService) {
 
         this.parserService = parserService;
         this.correctionService = correctionService;
@@ -68,6 +71,7 @@ public class VoiceCalculationController {
         this.graphAnalysisService = graphAnalysisService;
         this.geometrySolverService = geometrySolverService;
         this.statisticsService = statisticsService;
+        this.streakService = streakService;
     }
 
     @PostMapping("/calculate")
@@ -230,6 +234,10 @@ public class VoiceCalculationController {
 
         calculationService.save(
                 calculation);
+
+        // 🔥 Update Daily Streak
+
+        streakService.updateStreak();
 
         conversationMemoryService.save(
                 speech,

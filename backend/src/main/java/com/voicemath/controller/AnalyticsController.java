@@ -35,12 +35,17 @@ public class AnalyticsController {
                 calculationRepository.count();
 
         double averageScore =
-                progressRepository.findAll()
-                        .stream()
-                        .mapToDouble(
-                                p -> p.getScore())
-                        .average()
-                        .orElse(0);
+        progressRepository.findAll()
+                .stream()
+                .mapToDouble(
+                        p -> p.getScore())
+                .average()
+                .orElse(0);
+
+averageScore =
+        Math.round(
+                averageScore * 100.0)
+                / 100.0;
 
         long achievements = 0;
 

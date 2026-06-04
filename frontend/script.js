@@ -167,6 +167,7 @@ addHistory(
     data.expression,
     data.result
 );
+updateDashboard();
 
 speakResult(
     "The answer is " +
@@ -549,4 +550,9 @@ function teachTopic() {
         This feature is currently disabled.
         </p>
         `;
+}
+function openTutor() {
+
+    window.location.href =
+        "tutor.html";
 }

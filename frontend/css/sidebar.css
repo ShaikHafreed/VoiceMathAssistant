@@ -1,0 +1,52 @@
+.sidebar{
+
+    width:260px;
+
+    min-height:100vh;
+
+    background:#111827;
+
+    color:white;
+
+    padding:25px;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+}
+
+.logo{
+
+    width:60px;
+    margin-bottom:10px;
+}
+
+.logo-area{
+
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.menu{
+
+    list-style:none;
+}
+
+.menu li{
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin-bottom:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.menu li:hover{
+
+    background:#2563eb;
+}
